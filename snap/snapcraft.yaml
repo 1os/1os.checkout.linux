@@ -1,0 +1,41 @@
+name: 1os-checkout
+base: core20
+#title: Bitrix24 Cloud Cash Machine
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+version: '2022.01.19'
+summary: Bitrix24 Cloud POS # 79 char long summary
+description: |
+  This app connect your POS to Bitrix24
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+icon: ./fptr500.png
+
+apps:    
+  cloudfprint:
+    command: run.sh
+    environment:
+      PATH: $PATH:$SNAP/
+    daemon: simple
+    restart-condition: always
+    plugs: [network, network-bind, raw-usb, hardware-observe, io-ports-control]
+
+parts:
+  assets:
+    source: assets/
+    plugin: dump
+  libs:
+    plugin: dump
+    source:
+      - on amd64: https://cloudfprint.blob.core.windows.net/snap/1os.checkout.x64.zip
+      - on armhf: https://cloudfprint.blob.core.windows.net/snap/1os.checkout.arm.zip
+      - on arm64: https://cloudfprint.blob.core.windows.net/snap/1os.checkout.arm64.zip
+    source-type: zip
+    stage-packages:
+      - libqt5gui5
+      - zlib1g
+      - libusb-1.0-0
+    after: [assets]
+  
