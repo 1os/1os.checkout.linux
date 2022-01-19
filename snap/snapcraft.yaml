@@ -9,8 +9,8 @@ version: '2022.01.19'
 summary: Bitrix24 Cloud POS # 79 char long summary
 description: |
   This app connect your POS to Bitrix24
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 icon: ./fptr500.png
 
 apps:    
