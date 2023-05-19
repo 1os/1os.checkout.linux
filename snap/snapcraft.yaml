@@ -5,7 +5,7 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-version: '2023.05.19.1'
+version: '2023.05.19.2'
 summary: Bitrix24 Cloud POS # 79 char long summary
 description: |
   This app connect your POS to Bitrix24
@@ -37,5 +37,6 @@ parts:
       - libqt5gui5
       - zlib1g
       - libusb-1.0-0
+      - libicu-dev
     after: [assets]
   
