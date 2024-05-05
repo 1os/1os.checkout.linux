@@ -35,7 +35,6 @@ parts:
     source-type: zip
     stage-packages:
       - libqt5gui5
-      - zlib1g
       - libusb-1.0-0
     after: [assets]
   
