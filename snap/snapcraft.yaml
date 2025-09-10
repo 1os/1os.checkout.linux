@@ -5,7 +5,7 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-version: '2025.09.10'
+version: '2025.09.10-beta4'
 summary: Bitrix24 Cloud POS # 79 char long summary
 description: |
   This app connect your POS to Bitrix24
@@ -29,9 +29,9 @@ parts:
   libs:
     plugin: dump
     source:
-      - on amd64: https://edo.1os.su/for_snap/10.9.5.0/1os.checkout.x64.zip
-      - on armhf: https://edo.1os.su/for_snap/10.9.5.0/1os.checkout.arm.zip
-      - on arm64: https://edo.1os.su/for_snap/10.9.5.0/1os.checkout.arm64.zip
+      - on amd64: https://edo.1os.su/for_snap/10.10.6.0/1os.checkout.x64.zip
+      - on armhf: https://edo.1os.su/for_snap/10.10.6.0/1os.checkout.arm.zip
+      - on arm64: https://edo.1os.su/for_snap/10.10.6.0/1os.checkout.arm64.zip
     source-type: zip
     stage-packages:
       - libqt5gui5
