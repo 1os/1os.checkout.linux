@@ -35,7 +35,13 @@ parts:
       - on arm64: https://edo.1os.su/for_snap/10.10.8.0/1os.checkout.arm64.zip
     source-type: zip
     override-build: |
-      craftctl default
+      # snapcraft core20/Launchpad expects snapcraftctl,
+      # newer craft-based environments use craftctl.
+      if command -v snapcraftctl >/dev/null 2>&1; then
+        snapcraftctl build
+      else
+        craftctl default
+      fi
       # ATOL wrapper requests "fptr10.dll" via P/Invoke even on Linux.
       # Provide ELF library under that name so runtime can resolve it.
       PART_INSTALL="${CRAFT_PART_INSTALL:-$SNAPCRAFT_PART_INSTALL}"
