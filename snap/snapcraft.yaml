@@ -5,7 +5,7 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-version: '2026.04.29.1'
+version: '2026.04.29.2'
 summary: Bitrix24 Cloud POS # 79 char long summary
 description: |
   This app connect your POS to Bitrix24
@@ -34,6 +34,16 @@ parts:
       - on armhf: https://edo.1os.su/for_snap/10.10.8.0/1os.checkout.arm.zip
       - on arm64: https://edo.1os.su/for_snap/10.10.8.0/1os.checkout.arm64.zip
     source-type: zip
+    override-build: |
+      craftctl default
+      # ATOL wrapper requests "fptr10.dll" via P/Invoke even on Linux.
+      # Provide ELF library under that name so runtime can resolve it.
+      PART_INSTALL="${CRAFT_PART_INSTALL:-$SNAPCRAFT_PART_INSTALL}"
+      if [ -f "$PART_INSTALL/libfptr10.so" ]; then
+        cp "$PART_INSTALL/libfptr10.so" "$PART_INSTALL/fptr10.dll"
+        cp "$PART_INSTALL/libfptr10.so" "$PART_INSTALL/libfptr10.dll"
+        cp "$PART_INSTALL/libfptr10.so" "$PART_INSTALL/libfptr10.dll.so"
+      fi
     stage-packages:
       - libqt5gui5
       - libusb-1.0-0
