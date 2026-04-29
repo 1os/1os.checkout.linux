@@ -5,7 +5,7 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
-version: '2026.04.29'
+version: '2026.04.29.1'
 summary: Bitrix24 Cloud POS # 79 char long summary
 description: |
   This app connect your POS to Bitrix24
@@ -18,6 +18,7 @@ apps:
     command: run.sh
     environment:
       PATH: $PATH:$SNAP/
+      LD_LIBRARY_PATH: $SNAP:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
     daemon: simple
     restart-condition: always
     plugs: [network, network-bind, raw-usb, hardware-observe, io-ports-control]
@@ -36,5 +37,8 @@ parts:
     stage-packages:
       - libqt5gui5
       - libusb-1.0-0
+      - libstdc++6
+      - libgcc-s1
+      - liblttng-ust0
     after: [assets]
   
